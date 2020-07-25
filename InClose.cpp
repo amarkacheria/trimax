@@ -324,6 +324,8 @@ void InClose::sortRows()
 void InClose::outputNoConsBySize()
 {
 	/* create arrays to store the number of concepts of each size */
+	const int newN = n + 1;
+	const int newM = m + 1;
 	int noOfBSize[n+1];
 	int noOfASize[m+1];
 

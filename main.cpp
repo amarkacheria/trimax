@@ -40,10 +40,15 @@ tstart = clock();
     int maxExt =  boost::lexical_cast<int>(mae);
     int maxInt =  boost::lexical_cast<int>(mai);
 
+    cout<< "minExt: " << minExt << endl;
+    cout<< "minInt: " << minInt << endl;
+    cout<< "maxExt: " << maxExt << endl;
+    cout<< "maxInt: " << maxInt << endl;
         
     /// couting objects, attributes ///
     getline (inFile, line);
-    nbAttr = std::count(line.begin(), line.end(), '\t');
+    cout << line << endl;
+    nbAttr = std::count(line.begin(), line.end(), ',');
     while (getline (inFile, line))
           nbObj++;
     cout << "Found " << nbObj << " objects and " << nbAttr << " attributes." << endl;
@@ -68,8 +73,8 @@ tstart = clock();
     int itemnum = 0;
     getline (inFile, line);
     istringstream linestream(line);
-    getline (linestream, item, '\t');
-    while (getline (linestream, item, '\t'))
+    getline (linestream, item, ',');
+    while (getline (linestream, item, ','))
     {
           attrNames[itemnum++] = item;
     }
@@ -78,10 +83,10 @@ tstart = clock();
     {
         istringstream linestream(line);
         itemnum = 0;
-        getline (linestream, item, '\t');
+        getline (linestream, item, ',');
         objNames[linenum] = item;
 	
-        while (getline (linestream, item, '\t'))
+        while (getline (linestream, item, ','))
         {
           data[linenum][itemnum] =  boost::lexical_cast<double>(item);
           sorted_domain.insert(data[linenum][itemnum]);
