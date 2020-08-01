@@ -48,7 +48,7 @@ tstart = clock();
     /// couting objects, attributes ///
     getline (inFile, line);
     cout << line << endl;
-    nbAttr = std::count(line.begin(), line.end(), ',');
+    nbAttr = std::count(line.begin(), line.end(), ',') - 2;
     while (getline (inFile, line))
           nbObj++;
     cout << "Found " << nbObj << " objects and " << nbAttr << " attributes." << endl;
@@ -74,23 +74,33 @@ tstart = clock();
     getline (inFile, line);
     istringstream linestream(line);
     getline (linestream, item, ',');
-    while (getline (linestream, item, ','))
-    {
+    cout << "dummy item: " << item << endl;
+    int attrNameCounter = 0;
+    while (getline (linestream, item, ',') && attrNameCounter < nbAttr)
+    {  
+          cout << "attrName[itemnum] " << itemnum << " item: " << item << endl;
           attrNames[itemnum++] = item;
+          attrNameCounter++;
     }
 
     while (getline (inFile, line))
     {
         istringstream linestream(line);
         itemnum = 0;
+        // getting rowId
         getline (linestream, item, ',');
+        // setting objName
+        cout << "objName[linenum] " << linenum << " item: " << item << endl;
         objNames[linenum] = item;
-	
-        while (getline (linestream, item, ','))
+
+        int dataCounter = 0;
+        while (getline (linestream, item, ',') && dataCounter < nbAttr)
         {
+          cout << "data " << linenum << " " << itemnum << " : " << item << endl;
           data[linenum][itemnum] =  boost::lexical_cast<double>(item);
           sorted_domain.insert(data[linenum][itemnum]);
           itemnum++;
+          dataCounter++;
         }
         linenum++;
     }
