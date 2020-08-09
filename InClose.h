@@ -93,6 +93,8 @@ int numcons;		//number of concepts
 multi_double dataa;
 vector<double> classesL;
 vector<double> classesR;
+vector<string> objNames;
+vector<string> attrNames;
 int currentClass;
 unsigned int theta;
 
@@ -105,7 +107,7 @@ vector<int> beginR;
 unsigned int nbCandidates;
 //unsigned long density;
 
-    InClose(const multi_double &dataaaaa, vector<double> classesL, vector<double> classesR, int currentClass, vector<int> &_beginL, vector<int> &_beginR, int _minExt, int _minInt, int _maxExt,int _maxInt);
+    InClose(const multi_double &dataaaaa, vector<double> classesL, vector<double> classesR, int currentClass, vector<int> &_beginL, vector<int> &_beginR, int _minExt, int _minInt, int _maxExt,int _maxInt, vector<string> objNames, vector<string> attrNames);
     ~InClose();
     int ttmain();
     void initContextFromTol(double left, double right, const multi_double &data, int obj, int attr);//, char** obj_names, char** attr_names);

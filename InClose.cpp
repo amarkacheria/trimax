@@ -7,13 +7,15 @@
 
 
 
-InClose::InClose(const multi_double &dataaaaa, vector<double> _classesL, vector<double> _classesR, int _currentClass, vector<int> &_beginL, vector<int> &_beginR, int _minExt, int _minInt, int _maxExt,int _maxInt)
+InClose::InClose(const multi_double &dataaaaa, vector<double> _classesL, vector<double> _classesR, int _currentClass, vector<int> &_beginL, vector<int> &_beginR, int _minExt, int _minInt, int _maxExt,int _maxInt, vector<string> _objNames, vector<string> _attrNames)
 : dataa(dataaaaa), beginL(_beginL), beginR(_beginR), n(0), m(0), highc(1), startCol(0), numcons(0), pouet(0), nbCandidates(0), maxInt(_maxInt), maxExt(_maxExt), minIn(_minInt), minEx(_minExt)
 {
 	bptr = B;
 	currentClass = _currentClass;
 	classesL = _classesL;
 	classesR = _classesR;	
+	objNames = _objNames;
+	attrNames = _attrNames;
 	//density=0;
 
 ///// FOR SAFE CODE, BUT USELESS AND TIME CONSUMING.
@@ -434,13 +436,13 @@ unsigned int InClose::checkOutter()
             
             //// WRITE OUTPUT
             
-			string strData = "Objects {";
+			string strData = "";
 			for (boost::dynamic_bitset<>::size_type i = 0; i < extent.size(); i++)
-				if (extent[i]) strData += boost::lexical_cast<string, int>(i) + " ";
-			strData += "}, Attributes {";
+				if (extent[i]) strData += objNames[i] + " ";
+			strData += "-----";
 			for (boost::dynamic_bitset<>::size_type i = 0; i < intent.size(); i++)
-				if (intent[i]) strData += boost::lexical_cast<string, int>(i) + " ";
-			strData += "}\n";
+				if (intent[i]) strData += attrNames[i] + " ";
+			strData += "\n";
 			cout << strData;
         
 		

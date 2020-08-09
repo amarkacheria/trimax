@@ -39,19 +39,14 @@ tstart = clock();
     int minInt =  boost::lexical_cast<int>(mi);
     int maxExt =  boost::lexical_cast<int>(mae);
     int maxInt =  boost::lexical_cast<int>(mai);
-
-    cout<< "minExt: " << minExt << endl;
-    cout<< "minInt: " << minInt << endl;
-    cout<< "maxExt: " << maxExt << endl;
-    cout<< "maxInt: " << maxInt << endl;
         
     /// couting objects, attributes ///
     getline (inFile, line);
-    cout << line << endl;
+    // cout << line << endl;
     nbAttr = std::count(line.begin(), line.end(), ',') - 2;
     while (getline (inFile, line))
           nbObj++;
-    cout << "Found " << nbObj << " objects and " << nbAttr << " attributes." << endl;
+    // cout << "Found " << nbObj << " objects and " << nbAttr << " attributes." << endl;
     
     /// init data ///
     std::set<double> sorted_domain;
@@ -74,11 +69,11 @@ tstart = clock();
     getline (inFile, line);
     istringstream linestream(line);
     getline (linestream, item, ',');
-    cout << "dummy item: " << item << endl;
+    // cout << "dummy item: " << item << endl;
     int attrNameCounter = 0;
     while (getline (linestream, item, ',') && attrNameCounter < nbAttr)
     {  
-          cout << "attrName[itemnum] " << itemnum << " item: " << item << endl;
+          // cout << "attrName[itemnum] " << itemnum << " item: " << item << endl;
           attrNames[itemnum++] = item;
           attrNameCounter++;
     }
@@ -90,13 +85,13 @@ tstart = clock();
         // getting rowId
         getline (linestream, item, ',');
         // setting objName
-        cout << "objName[linenum] " << linenum << " item: " << item << endl;
+        // cout << "objName[linenum] " << linenum << " item: " << item << endl;
         objNames[linenum] = item;
 
         int dataCounter = 0;
         while (getline (linestream, item, ',') && dataCounter < nbAttr)
         {
-          cout << "data " << linenum << " " << itemnum << " : " << item << endl;
+          // cout << "data " << linenum << " " << itemnum << " : " << item << endl;
           data[linenum][itemnum] =  boost::lexical_cast<double>(item);
           sorted_domain.insert(data[linenum][itemnum]);
           itemnum++;
@@ -174,7 +169,7 @@ for (unsigned int l=0; l != classesL.size(); l++)
    {
        //cout << "[" << classesL[l] << ";" << classesR[l] << "], " << endl;
        InClose *algo;
-       algo = new InClose(data,classesL, classesR, l, beginL, beginR, minExt, minInt, maxExt, maxInt);
+       algo = new InClose(data,classesL, classesR, l, beginL, beginR, minExt, minInt, maxExt, maxInt, objNames, attrNames);
        algo->initContextFromTol(classesL[l], classesR[l], data, nbObj, nbAttr);
        totalBiclusters += algo->ttmain();
       totalCandidates += algo->nbCandidates;
@@ -194,9 +189,9 @@ for (unsigned int l=0; l != classesL.size(); l++)
 //double d = boost::lexical_cast<double>( density);
 //cout << d / c / (o * at);
 
-cout << totalBiclusters << " max. biclusters\n"
-     << totalCandidates << " candidates\n"
-     << mstimer(tstart,tstop) << " ms\n" ;
+// cout << totalBiclusters << " max. biclusters\n"
+//      << totalCandidates << " candidates\n"
+//      << mstimer(tstart,tstop) << " ms\n" ;
 
 /**cout << theta  << "\t"
      << nbObj  << "\t"
